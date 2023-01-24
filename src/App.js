@@ -1,6 +1,12 @@
-// Import the functions you need from the SDKs you need
+import { BrowserRouter } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+import { useState } from "react";
+
+import LoginPage from "./pages/LoginPage";
+import RoutingStuff from "./components/RoutingStuff";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA2ABbS8WfN0HGraMfBn3wbA8xNZsw1ido",
@@ -13,11 +19,22 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const auth = getAuth(app);
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({});
+
+  onAuthStateChanged(auth, () => {
+    setCurrentUser(auth.currentUser);
+  });
+
+  console.log(currentUser);
+
   return (
     <>
-      <h1>Sample Flip Friday</h1>
+      <BrowserRouter>
+        <RoutingStuff />
+      </BrowserRouter>
     </>
   );
 }
