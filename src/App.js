@@ -2,6 +2,8 @@ import { BrowserRouter } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 import { useState } from "react";
 
@@ -20,6 +22,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -28,14 +32,14 @@ function App() {
     setCurrentUser(auth.currentUser);
   });
 
-  console.log(currentUser);
-
   return (
-    <>
-      <BrowserRouter>
-        <RoutingStuff />
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      {currentUser ? (
+        <RoutingStuff db={db} storage={storage} />
+      ) : (
+        <LoginPage auth={auth} />
+      )}
+    </BrowserRouter>
   );
 }
 
