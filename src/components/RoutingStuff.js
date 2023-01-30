@@ -8,13 +8,10 @@ function RoutingStuff({ db, storage, auth }) {
     <>
       <Navigation auth={auth} />
       <Routes>
-        <Route
-          path="/"
-          element={<SampleLibraryPage db={db} storage={storage} />}
-        />
+        <Route path="/" element={<SampleLibraryPage db={db} auth={auth} />} />
         <Route
           path="/sampleupload"
-          element={<SampleUploadPage db={db} storage={storage} />}
+          element={<SampleUploadPage db={db} storage={storage} auth={auth} />}
         />
       </Routes>
     </>
