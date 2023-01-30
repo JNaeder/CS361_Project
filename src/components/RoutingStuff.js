@@ -1,10 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import SampleLibraryPage from "../pages/SampleLibraryPage";
 import SampleUploadPage from "../pages/SampleUploadPage";
+import Navigation from "./Navigation";
 
-function RoutingStuff({ db, storage }) {
+function RoutingStuff({ db, storage, auth }) {
   return (
     <>
+      <Navigation auth={auth} />
       <Routes>
         <Route
           path="/"

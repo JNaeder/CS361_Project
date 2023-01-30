@@ -23,10 +23,9 @@ function SampleLibraryPage({ db }) {
   return (
     <>
       <div>
-        <h1>Sample Library Page</h1>
-        <button>Sign Out</button>
+        <h3>Sample Library Page</h3>
       </div>
-      <table>
+      <table className="sample_table">
         <thead>
           <tr>
             <th>Sample Name</th>
@@ -41,8 +40,10 @@ function SampleLibraryPage({ db }) {
           ))}
         </tbody>
       </table>
-
-      <button onClick={() => navigate("/sampleupload")}>Upload</button>
+      <div className="upload_container">
+        <p>Upload your own samples!</p>
+        <button onClick={() => navigate("/sampleupload")}>Upload</button>
+      </div>
     </>
   );
 }

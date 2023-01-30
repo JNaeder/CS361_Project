@@ -1,4 +1,6 @@
-import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -9,6 +11,7 @@ import { useState } from "react";
 
 import LoginPage from "./pages/LoginPage";
 import RoutingStuff from "./components/RoutingStuff";
+import SignUpPage from "./pages/SignUpPage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA2ABbS8WfN0HGraMfBn3wbA8xNZsw1ido",
@@ -33,13 +36,19 @@ function App() {
   });
 
   return (
-    <BrowserRouter>
-      {currentUser ? (
-        <RoutingStuff db={db} storage={storage} />
-      ) : (
-        <LoginPage auth={auth} />
-      )}
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        {currentUser ? (
+          <RoutingStuff db={db} storage={storage} auth={auth} />
+        ) : (
+          // <LoginPage auth={auth} />
+          <Routes>
+            <Route path="/" element={<LoginPage auth={auth} />} />
+            <Route path="/signup" element={<SignUpPage />} />
+          </Routes>
+        )}
+      </BrowserRouter>
+    </div>
   );
 }
 
