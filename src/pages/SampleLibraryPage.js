@@ -39,8 +39,12 @@ function SampleLibraryPage({ db, auth }) {
       <div>
         <h3>Sample Library Page</h3>
       </div>
+      <div className="upload_container">
+        <p>Upload your own samples!</p>
+        <button onClick={() => navigate("/sampleupload")}>Upload</button>
+      </div>
       <div className="settings_slider">
-        <label>Basic/Advanced</label>
+        <label>Show Basic/Advanced Info</label>
         <label className="switch">
           <input
             type="checkbox"
@@ -72,10 +76,6 @@ function SampleLibraryPage({ db, auth }) {
           ))}
         </tbody>
       </table>
-      <div className="upload_container">
-        <p>Upload your own samples!</p>
-        <button onClick={() => navigate("/sampleupload")}>Upload</button>
-      </div>
     </>
   );
 }

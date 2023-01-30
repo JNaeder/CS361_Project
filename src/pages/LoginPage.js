@@ -28,7 +28,7 @@ function LoginPage({ auth }) {
     <>
       <h1>Sample Flip Friday</h1>
       <h3>Login Page</h3>
-      <p>Login With Your User Credentials</p>
+      <p className="instructions">Login With Your User Credentials</p>
       <form className="form_container">
         <div className="form_input">
           <label htmlFor="user_name">Email</label>

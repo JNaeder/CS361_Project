@@ -37,6 +37,9 @@ function SampleUploadPage({ db, storage, auth }) {
 
   const uploadFile = async function (e) {
     e.preventDefault();
+    if (!window.confirm("Are you sure all of this data is correct?")) {
+      return;
+    }
     const fileRef = ref(storage, theFile["name"]);
     await uploadBytes(fileRef, theFile).then((snapshot) => {
       console.log(snapshot);
@@ -63,6 +66,12 @@ function SampleUploadPage({ db, storage, auth }) {
   return (
     <>
       <h1>Sample Upload</h1>
+      <div className="button_container">
+        <button onClick={uploadFile}>Upload Sample</button>
+        <button onClick={() => navigation("/")} className="red">
+          Cancel
+        </button>
+      </div>
       <div className="settings_slider">
         <label>Basic/Advanced</label>
         <label className="switch">
@@ -73,11 +82,9 @@ function SampleUploadPage({ db, storage, auth }) {
           <span className="slider round"></span>
         </label>
       </div>
-
-      <div className="button_container">
-        <button onClick={uploadFile}>Upload Sample</button>
-        <button onClick={() => navigation("/")}>Cancel</button>
-      </div>
+      <p className={advancedClassName}>
+        You will need to enter all of the information for the sample.
+      </p>
 
       <form className="upload_form">
         <label htmlFor="fileUpload">Choose File</label>
