@@ -1,11 +1,60 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, doc, setDoc } from "firebase/firestore";
 
-function SignUpPage() {
+function SignUpPage({ db, auth }) {
   const navigation = useNavigate();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  const getAvatar = async function () {
+    const response = await fetch(
+      "https://cs361-avatar-microservice.onrender.com/random"
+    );
+    const output = await response.json();
+    return output["url"];
+  };
+
+  const signUpUser = async function (e) {
+    e.preventDefault();
+    const userDB = collection(db, "users");
+
+    // ----- Input Validation -----
+    // Check if email or password is empty
+    if (!userName || !password) {
+      alert("email or password is blank");
+      return;
+    }
+    // Check if passwords don't match
+    if (password !== passwordConfirm) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    const userResponse = await createUserWithEmailAndPassword(
+      auth,
+      userName,
+      password
+    );
+
+    const newUser = userResponse["user"];
+    const photoURL = await getAvatar();
+
+    const userData = {
+      email: newUser["email"],
+      avatar: photoURL,
+    };
+
+    console.log(userData);
+
+    const newDoc = doc(userDB, newUser["uid"]);
+    console.log(newDoc);
+    const docResponse = await setDoc(newDoc, userData);
+    console.log(docResponse);
+  };
+
   return (
     <>
       <h3>Signup Page</h3>
@@ -34,7 +83,9 @@ function SignUpPage() {
             onChange={(e) => setPasswordConfirm(e.target.value)}
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button type="submit" onClick={signUpUser}>
+          Sign Up
+        </button>
         <div>
           <p>Have a login already?</p>
           <button type="submit" onClick={() => navigation("/")}>

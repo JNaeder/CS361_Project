@@ -2,7 +2,6 @@ import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
@@ -23,7 +22,6 @@ const firebaseConfig = {
   measurementId: "G-1JMNBJY3GL",
 };
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
@@ -41,10 +39,12 @@ function App() {
         {currentUser ? (
           <RoutingStuff db={db} storage={storage} auth={auth} />
         ) : (
-          // <LoginPage auth={auth} />
           <Routes>
             <Route path="/" element={<LoginPage auth={auth} />} />
-            <Route path="/signup" element={<SignUpPage />} />
+            <Route
+              path="/signup"
+              element={<SignUpPage db={db} auth={auth} />}
+            />
           </Routes>
         )}
       </BrowserRouter>
