@@ -47,12 +47,9 @@ function SignUpPage({ db, auth }) {
       avatar: photoURL,
     };
 
-    console.log(userData);
-
     const newDoc = doc(userDB, newUser["uid"]);
-    console.log(newDoc);
     const docResponse = await setDoc(newDoc, userData);
-    console.log(docResponse);
+    navigation("/");
   };
 
   return (

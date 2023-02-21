@@ -15,6 +15,17 @@ nav {
   justify-content: space-evenly;
 }
 
+.avatar_image {
+  border-radius: 50%;
+  width: 50px;
+}
+
+.user_profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 /* Signup Form */
 .form_container {
   border: solid black 1px;

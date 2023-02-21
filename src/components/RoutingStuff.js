@@ -6,7 +6,7 @@ import Navigation from "./Navigation";
 function RoutingStuff({ db, storage, auth }) {
   return (
     <>
-      <Navigation auth={auth} />
+      <Navigation auth={auth} db={db} />
       <Routes>
         <Route path="/" element={<SampleLibraryPage db={db} auth={auth} />} />
         <Route
