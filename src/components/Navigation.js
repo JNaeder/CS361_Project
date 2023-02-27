@@ -30,13 +30,13 @@ function Navigation({ auth, db }) {
   return (
     <nav>
       <button onClick={emailHelp}>Questions?</button>
-      <h1>Sample Flip Friday</h1>
+      <h1 className="main_title">Sample Flip Friday</h1>
       <div className="user_profile">
         <img
           src={userProfile ? userProfile["avatar"] : ""}
           className="avatar_image"
         />
-        <h2>{userProfile ? userProfile["email"] : "blank user"}</h2>
+        <h2>{userProfile ? userProfile["email"] : ""}</h2>
       </div>
       <button onClick={signOutUser}>Sign Out</button>
     </nav>

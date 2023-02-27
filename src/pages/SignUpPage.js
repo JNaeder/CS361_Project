@@ -38,6 +38,7 @@ function SignUpPage({ db, auth }) {
       userName,
       password
     );
+    auth.signOut();
 
     const newUser = userResponse["user"];
     const photoURL = await getAvatar();
@@ -46,6 +47,8 @@ function SignUpPage({ db, auth }) {
       email: newUser["email"],
       avatar: photoURL,
     };
+
+    alert("User Created!");
 
     const newDoc = doc(userDB, newUser["uid"]);
     const docResponse = await setDoc(newDoc, userData);

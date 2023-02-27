@@ -9,10 +9,8 @@ function LoginPage({ auth }) {
 
   const loginButton = function (e) {
     e.preventDefault();
-    console.log(auth);
-    signInWithEmailAndPassword(auth, userName, password).then(
-      (userCredential) => console.log(userCredential)
-    );
+    // console.log(auth);
+    signInWithEmailAndPassword(auth, userName, password);
   };
 
   const forgotPassword = function (e) {
