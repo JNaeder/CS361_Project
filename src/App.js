@@ -5,6 +5,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
 import { useState } from "react";
 
@@ -25,6 +26,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
+const functions = getFunctions(app);
+// connectFunctionsEmulator(functions, "localhost", 5001);
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -37,7 +40,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         {currentUser ? (
-          <RoutingStuff db={db} storage={storage} auth={auth} />
+          <RoutingStuff
+            db={db}
+            storage={storage}
+            auth={auth}
+            functions={functions}
+          />
         ) : (
           <Routes>
             <Route path="/" element={<LoginPage auth={auth} />} />

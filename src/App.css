@@ -203,3 +203,31 @@ button {
 .red {
   background-color: rgb(194, 61, 61);
 }
+
+.page_top_bar {
+  /* background-color: grey; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: solid 2px black;
+}
+
+.page_top_bar h1 {
+  margin: 10px 50px 10px 0px;
+}
+
+.sample_pack_page_file {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #c5c5c5;
+  width: 50vw;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+.avatar_sample_pack_image {
+  width: 45px;
+  border-radius: 50px;
+  border: solid black 2px;
+}

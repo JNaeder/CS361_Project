@@ -60,7 +60,7 @@ function SampleUploadPage({ db, storage, auth }) {
     const docRef = await addDoc(sampleCollection, sampleInfo);
     console.log(`Wrote doc ${docRef.id}`);
 
-    navigation("/");
+    navigation("/samplelibrary");
   };
 
   return (
