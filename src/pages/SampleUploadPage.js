@@ -68,7 +68,7 @@ function SampleUploadPage({ db, storage, auth }) {
       <h1>Sample Upload</h1>
       <div className="button_container">
         <button onClick={uploadFile}>Upload Sample</button>
-        <button onClick={() => navigation("/")} className="red">
+        <button onClick={() => navigation("/samplelibrary")} className="red">
           Cancel
         </button>
       </div>
